@@ -25,6 +25,8 @@ import org.matsim.core.controler.Controler;
 import org.matsim.core.controler.OutputDirectoryHierarchy.OverwriteFileSetting;
 import org.matsim.core.gbl.Gbl;
 import org.matsim.core.scenario.ScenarioUtils;
+import org.matsim.usagestats.UsageStatsConfigGroup;
+import org.matsim.usagestats.UsageStatsModule;
 
 /**
  * @author nagel
@@ -34,13 +36,14 @@ public class RunMatsim {
 
 	public static void main(String[] args) {
 		Gbl.assertIf(args.length >=1 && args[0]!="" );
-		run(ConfigUtils.loadConfig(args[0]));
+		run(ConfigUtils.loadConfig(args[0], new UsageStatsConfigGroup()));
 		// makes some sense to not modify the config here but in the run method to help  with regression testing.
 	}
 	
 	static void run(Config config) {
 		
 		// possibly modify config here
+		config.controler().setLastIteration(10);
 		
 		// ---
 		
@@ -53,6 +56,7 @@ public class RunMatsim {
 		Controler controler = new Controler( scenario ) ;
 		
 		// possibly modify controler here
+		controler.addOverridingModule(new UsageStatsModule());
 		
 		// ---
 		
