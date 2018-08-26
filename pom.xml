@@ -50,8 +50,9 @@
 
 		<dependency>
 			<groupId>com.github.tduberne</groupId>
-			<artifactId>matsim-stats</groupId>
-			<version>76ffe6c</version>
+			<artifactId>matsim-stats</artifactId>
+			<version>v0.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
